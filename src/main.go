@@ -15,6 +15,8 @@ func main() {
 	e.Use(middleware.CORS())
 
 	e.GET("/", hello)
+
+	e.Logger.Fatal(e.Start(":8080"))
 }
 
 func hello(c echo.Context) error {
