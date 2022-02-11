@@ -1,4 +1,4 @@
-package infrastructre
+package infrastructure
 
 import (
 	"os"

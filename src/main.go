@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 
+	"github.com/kokoneko/go-todo-app/src/infrastructure/handler"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -15,6 +16,8 @@ func main() {
 	e.Use(middleware.CORS())
 
 	e.GET("/", hello)
+
+	e.GET("/todo-list", handler.GetTodoList)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
