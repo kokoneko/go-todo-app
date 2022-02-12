@@ -3,8 +3,8 @@ package usecase
 import (
 	"time"
 
-	"github.com/kokoneko/go-todo-app/repository"
 	"github.com/kokoneko/go-todo-app/domain"
+	"github.com/kokoneko/go-todo-app/repository"
 
 	"github.com/labstack/gommon/log"
 )
@@ -25,9 +25,9 @@ func GetTodoList() (*GetTodoListResponse, error) {
 }
 
 type GetTodoItemResponse struct {
-	ID 		uint32 	  `json:"id"`
-	Title 	string 	  `json:"title"`
-	Memo 	string 	  `json:"memo"`
+	ID      uint32     `json:"id"`
+	Title   string     `json:"title"`
+	Memo    string     `json:"memo"`
 	Expired *time.Time `json:"expired"`
 }
 
@@ -40,25 +40,25 @@ func GetTodoById(id int) (*GetTodoItemResponse, error) {
 	}
 
 	return &GetTodoItemResponse{
-		ID:		 todo.ID,
-		Title: 	 todo.Title,
-		Memo: 	 todo.Memo,
+		ID:      todo.ID,
+		Title:   todo.Title,
+		Memo:    todo.Memo,
 		Expired: todo.Expired,
 	}, nil
 }
 
 type CreateTodoItemRequest struct {
-	Title 	string 	  `json:"title" validate:"required"`
-	Memo 	string 	  `json:"memo"`
+	Title   string     `json:"title" validate:"required"`
+	Memo    string     `json:"memo"`
 	Expired *time.Time `json:"expired,omitempty"`
 }
 
 func CreateTodoItem(p *CreateTodoItemRequest) error {
 	now := time.Now()
 	todo := &domain.TodoItem{
-		Title: 	 p.Title,
-		Memo: 	 p.Memo,
-		Expired: p.Expired,
+		Title:     p.Title,
+		Memo:      p.Memo,
+		Expired:   p.Expired,
 		CreatedAt: now,
 		UpdatedAt: now,
 	}
