@@ -18,6 +18,7 @@ func main() {
 	e.GET("/", hello)
 
 	e.GET("/todo-list", handler.GetTodoList)
+	e.GET("/todo-list/:id", handler.GetTodoById)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
