@@ -5,6 +5,7 @@ import (
 	"strconv"
 	"github.com/kokoneko/go-todo-app/usecase"
 	"github.com/labstack/echo/v4"
+	"github.com/go-playground/validator"
 )
 
 func GetTodoList(c echo.Context) error {
@@ -30,6 +31,12 @@ func CreateTodoItem(c echo.Context) error {
 	p := new(usecase.CreateTodoItemRequest)
 	if err := c.Bind(p); err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+
+	validate := validator.New()
+	if err := validate.Struct(p); err != nil {
+		validationErrors := err.(validator.ValidationErrors)
+		return c.JSON(http.StatusBadRequest, validationErrors)
 	}
 
 	if err := usecase.CreateTodoItem(p); err != nil {
