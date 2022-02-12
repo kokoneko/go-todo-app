@@ -15,7 +15,7 @@ services:
       context: .
       dockerfile: ./docker/api/Dockerfile
     volumes:
-      - ./src:/api
+      - ./src:/go/src
     environment:
       TZ: Asia/Tokyo
       DBMS: mysql

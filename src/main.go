@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/kokoneko/go-todo-app/src/infrastructure/handler"
+	"go-todo-app/handler"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )

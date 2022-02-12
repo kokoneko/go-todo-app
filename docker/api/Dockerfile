@@ -4,6 +4,10 @@ RUN apk add make gcc g++ git
 
 RUN go get -u github.com/cosmtrek/air
 
-RUN go env -w GO111MODULE=on
+RUN go get bitbucket.org/liamstask/goose/cmd/goose
 
-WORKDIR /api
+ENV GO111MODULE on
+ENV GOPATH /go
+
+WORKDIR /go/src
+COPY ./src .
