@@ -1,11 +1,11 @@
 package handler
 
 import (
-	"net/http"
-	"strconv"
+	"github.com/go-playground/validator"
 	"github.com/kokoneko/go-todo-app/usecase"
 	"github.com/labstack/echo/v4"
-	"github.com/go-playground/validator"
+	"net/http"
+	"strconv"
 )
 
 func GetTodoList(c echo.Context) error {
