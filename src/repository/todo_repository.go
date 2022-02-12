@@ -26,3 +26,13 @@ func GetTodoById(id int) (*domain.TodoItem, error) {
 
     return todo, nil
 }
+
+func CreateTodoItem(todo *domain.TodoItem) error {
+    db := infrastructure.ConnectDB()
+
+    if err := db.Create(todo).Error; err != nil {
+        return err
+    }
+
+    return nil
+}
