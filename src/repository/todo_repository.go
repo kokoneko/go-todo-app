@@ -1,8 +1,8 @@
 package repository
 
 import (
-    "go-todo-app/domain"
-    "go-todo-app/infrastructure"
+    "github.com/kokoneko/go-todo-app/domain"
+    "github.com/kokoneko/go-todo-app/infrastructure"
 )
 
 func GetTodoList() ([]*domain.TodoItem, error) {

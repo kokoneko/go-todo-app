@@ -3,8 +3,8 @@ package usecase
 import (
 	"time"
 
-	"go-todo-app/repository"
-	"go-todo-app/domain"
+	"github.com/kokoneko/go-todo-app/repository"
+	"github.com/kokoneko/go-todo-app/domain"
 
 	"github.com/labstack/gommon/log"
 )

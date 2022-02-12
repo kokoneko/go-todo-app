@@ -3,7 +3,7 @@ package handler
 import (
 	"net/http"
 	"strconv"
-	"go-todo-app/usecase"
+	"github.com/kokoneko/go-todo-app/usecase"
 	"github.com/labstack/echo/v4"
 )
 
