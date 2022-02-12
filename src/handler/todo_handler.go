@@ -1,11 +1,12 @@
 package handler
 
 import (
+	"net/http"
+	"strconv"
+
 	"github.com/go-playground/validator"
 	"github.com/kokoneko/go-todo-app/usecase"
 	"github.com/labstack/echo/v4"
-	"net/http"
-	"strconv"
 )
 
 func GetTodoList(c echo.Context) error {
@@ -44,4 +45,30 @@ func CreateTodoItem(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusCreated, []string{})
+}
+
+func UpdateTodoItem(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+	todo, err := usecase.GetTodoById(id)
+	if err != nil {
+		return c.JSON(http.StatusNotFound, err.Error())
+	}
+
+	p := new(usecase.UpdateTodoItemRequest)
+	if err := c.Bind(p); err != nil {
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+
+	validate := validator.New()
+	if err := validate.Struct(p); err != nil {
+		validationErrors := err.(validator.ValidationErrors)
+		return c.JSON(http.StatusBadRequest, validationErrors)
+	}
+
+	res, err := usecase.UpdateTodoItem(todo, p)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
+
+	return c.JSON(http.StatusCreated, res)
 }

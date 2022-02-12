@@ -18,8 +18,9 @@ func main() {
 	e.GET("/", hello)
 
 	e.GET("/todo-list", handler.GetTodoList)
-	e.GET("/todo-item/:id", handler.GetTodoById)
+	e.GET("/todo-list/:id", handler.GetTodoById)
 	e.POST("/todo-item", handler.CreateTodoItem)
+	e.PUT("/todo-item/:id", handler.UpdateTodoItem)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }

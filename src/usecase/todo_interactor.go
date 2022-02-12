@@ -24,14 +24,7 @@ func GetTodoList() (*GetTodoListResponse, error) {
 	return &GetTodoListResponse{List: todoList}, nil
 }
 
-type GetTodoItemResponse struct {
-	ID      uint32     `json:"id"`
-	Title   string     `json:"title"`
-	Memo    string     `json:"memo"`
-	Expired *time.Time `json:"expired"`
-}
-
-func GetTodoById(id int) (*GetTodoItemResponse, error) {
+func GetTodoById(id int) (*domain.TodoItem, error) {
 	todo, err := repository.GetTodoById(id)
 
 	if err != nil {
@@ -39,12 +32,7 @@ func GetTodoById(id int) (*GetTodoItemResponse, error) {
 		return nil, err
 	}
 
-	return &GetTodoItemResponse{
-		ID:      todo.ID,
-		Title:   todo.Title,
-		Memo:    todo.Memo,
-		Expired: todo.Expired,
-	}, nil
+	return todo, nil
 }
 
 type CreateTodoItemRequest struct {
@@ -70,4 +58,25 @@ func CreateTodoItem(p *CreateTodoItemRequest) error {
 	}
 
 	return nil
+}
+
+type UpdateTodoItemRequest struct {
+	Title   string     `json:"title" validate:"required"`
+	Memo    string     `json:"memo"`
+	Expired *time.Time `json:"expired,omitempty"`
+}
+
+func UpdateTodoItem(todo *domain.TodoItem, p *UpdateTodoItemRequest) (*domain.TodoItem, error) {
+	ut := map[string]interface{}{
+		"title":   p.Title,
+		"memo":    p.Memo,
+		"expired": p.Expired,
+	}
+
+	if _, err := repository.UpdateTodoItem(todo, ut); err != nil {
+		log.Debug("update todo item error", err)
+		return nil, err
+	}
+
+	return todo, nil
 }
