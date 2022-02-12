@@ -80,3 +80,13 @@ func UpdateTodoItem(todo *domain.TodoItem, p *UpdateTodoItemRequest) (*domain.To
 
 	return todo, nil
 }
+
+func DeleteTodoItem(todo *domain.TodoItem) error {
+	err := repository.DeleteTodoItem(todo)
+	if err != nil {
+		log.Debug("delete todo item error", err)
+		return err
+	}
+
+	return nil
+}
