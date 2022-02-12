@@ -19,10 +19,6 @@ services:
     environment:
       TZ: Asia/Tokyo
       DBMS: mysql
-      MYSQL_DATABASE: go_api
-      MYSQL_HOST: tcp(db:3306)
-      MYSQL_USER: api_user
-      MYSQL_PASSWORD: Passw0rd
     ports:
       - 8080:8080
     command:

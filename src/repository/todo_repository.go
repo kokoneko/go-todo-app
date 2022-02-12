@@ -36,3 +36,12 @@ func CreateTodoItem(todo *domain.TodoItem) error {
 
 	return nil
 }
+
+func UpdateTodoItem(todo *domain.TodoItem, ut map[string]interface{}) (*domain.TodoItem, error) {
+	db := infrastructure.ConnectDB()
+	if err := db.Model(&todo).Updates(ut).Error; err != nil {
+		return nil, err
+	}
+
+	return todo, nil
+}
