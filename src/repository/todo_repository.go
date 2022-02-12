@@ -15,3 +15,14 @@ func GetTodoList() ([]*domain.TodoItem, error) {
 
     return todoList, nil
 }
+
+func GetTodoById(id int) (*domain.TodoItem, error) {
+    db := infrastructure.ConnectDB()
+
+    var todo *domain.TodoItem
+    if err := db.First(&todo, id).Error; err != nil {
+        return nil, err
+    }
+
+    return todo, nil
+}
