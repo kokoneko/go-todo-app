@@ -3,4 +3,4 @@ development:
   open: api_user:Passw0rd@tcp(db:3306)/go_api
 test:
   driver: mysql
-  open: api_user:Passw0rd@tcp(db:3306)/go_api_test
+  open: api_user:Passw0rd@tcp(db-test:3306)/go_api_test

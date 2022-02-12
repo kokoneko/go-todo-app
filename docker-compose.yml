@@ -29,6 +29,7 @@ services:
 
   db:
     image: mysql:5.7
+    container_name: db
     volumes:
       - ./docker/db/initdb:/docker-entrypoint-initdb.d
       - db-store:/var/lib/mysql
@@ -42,5 +43,22 @@ services:
       - 3306:3306
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
+  test_db:
+    image: mysql:5.7
+    container_name: db-test
+    volumes:
+      - ./docker/db-test/initdb:/docker-entrypoint-initdb.d
+      - db-test-store:/var/lib/mysql
+    environment:
+      TZ: Asia/Tokyo
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: go_api_test
+      MYSQL_USER: api_user
+      MYSQL_PASSWORD: Passw0rd
+    ports:
+      - 3006:3306
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
 volumes:
   db-store:
+  db-test-store:
