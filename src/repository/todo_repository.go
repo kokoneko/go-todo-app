@@ -45,3 +45,12 @@ func UpdateTodoItem(todo *domain.TodoItem, ut map[string]interface{}) (*domain.T
 
 	return todo, nil
 }
+
+func DeleteTodoItem(todo *domain.TodoItem) error {
+	db := infrastructure.ConnectDB()
+	if err := db.Delete(&todo).Error; err != nil {
+		return err
+	}
+
+	return nil
+}

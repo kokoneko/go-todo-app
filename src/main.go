@@ -21,6 +21,7 @@ func main() {
 	e.GET("/todo-list/:id", handler.GetTodoById)
 	e.POST("/todo-item", handler.CreateTodoItem)
 	e.PUT("/todo-item/:id", handler.UpdateTodoItem)
+	e.DELETE("/todo-item/:id", handler.DeleteTodoItem)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }

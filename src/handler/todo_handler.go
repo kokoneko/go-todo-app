@@ -72,3 +72,17 @@ func UpdateTodoItem(c echo.Context) error {
 
 	return c.JSON(http.StatusCreated, res)
 }
+
+func DeleteTodoItem(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+	todo, err := usecase.GetTodoById(id)
+	if err != nil {
+		return c.JSON(http.StatusNotFound, err.Error())
+	}
+
+	if err := usecase.DeleteTodoItem(todo); err != nil {
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
+
+	return c.JSON(http.StatusNoContent, []string{})
+}
