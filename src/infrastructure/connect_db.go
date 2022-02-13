@@ -1,7 +1,6 @@
 package infrastructure
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -10,7 +9,7 @@ import (
 )
 
 func ConnectDB() *gorm.DB {
-	godotenv.Load(fmt.Sprintf("%s.env", os.Getenv("GO_ENV")))
+	godotenv.Load(".env")
 
 	dns := os.Getenv("DB_USER") + ":" + os.Getenv("DB_PASSWORD") + "@" + os.Getenv("DB_HOST") + "/" + os.Getenv("DB_NAME") + "?charset=utf8mb4&parseTime=True&loc=Asia%2FTokyo"
 	db, err := gorm.Open(mysql.Open(dns), &gorm.Config{})
